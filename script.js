@@ -83,28 +83,59 @@
 // box6.clickMe();
 
 
-function Person(name) {
-  this.name = name;
-}
+// function Person(name) {
+//   this.name = name;
+// }
 
-// ES5 Trick
-Person.prototype.myFriends5 = function (friends) {
-  var arr = friends.map(function (el) {
-    return this.name + ' is friends with ' + el;
-  }.bind(this));
+// // ES5 Trick
+// Person.prototype.myFriends5 = function (friends) {
+//   var arr = friends.map(function (el) {
+//     return this.name + ' is friends with ' + el;
+//   }.bind(this));
 
-  console.log(arr);
-}
+//   console.log(arr);
+// }
+// var friends = ['Bob', 'Jane', 'Mark'];
 
-var friends = ['Bob', 'Jane', 'Mark'];
+// new Person('John').myFriends5(friends);
 
-new Person('John').myFriends5(friends);
-let mark = new Person('Mark');
+// //ES6
+// let mike = new Person('Mike');
+// Person.prototype.myFriends6 = function (friends) {
+//   let arr = friends.map(el => this.name + ' is friends with ' + el);
+
+//   console.log(arr);
+// }
+// mike.myFriends6(friends);
+
+
+/******************
+ * Destructuring
+ */
+
+// ES5
+//  var john = ['John', 26];
+//  var name = john[0];
+//  var age = john[1];
 
 //ES6
-Person.prototype.myFriends6 = function (friends) {
-  let arr = friends.map(el => this.name + ' is friends with ' + el);
+const [name, age] = ['John', 26];
+console.log(name, age);
 
-  console.log(arr);
-}
-mark.myFriends6(friends);
+const obj = {
+  firstName: 'John',
+  lastName: 'Smith'
+};
+
+const {
+  firstName,
+  lastName
+} = obj;
+console.log(firstName);
+console.log(lastName);
+
+const {
+  firstName: a,
+  lastName: b
+} = obj;
+console.log(a, b);
