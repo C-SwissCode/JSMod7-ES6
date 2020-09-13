@@ -113,37 +113,110 @@
  * Destructuring
  */
 
-// ES5
+// // ES5
 //  var john = ['John', 26];
 //  var name = john[0];
 //  var age = john[1];
 
-//ES6
-const [name, age] = ['John', 26];
-console.log(name, age);
+// //ES6
+// const [name, age] = ['John', 26];
+// console.log(name, age);
 
-const obj = {
-  firstName: 'John',
-  lastName: 'Smith'
-};
+// const obj = {
+//   firstName: 'John',
+//   lastName: 'Smith'
+// };
 
-const {
-  firstName,
-  lastName
-} = obj;
-console.log(firstName);
-console.log(lastName);
+// const {
+//   firstName,
+//   lastName
+// } = obj;
+// console.log(firstName);
+// console.log(lastName);
 
-const {
-  firstName: a,
-  lastName: b
-} = obj;
-console.log(a, b);
+// const {
+//   firstName: a,
+//   lastName: b
+// } = obj;
+// console.log(a, b);
 
-function calcAgeRetirement(year) {
-  const age2 = new Date().getFullYear() - year;
-  return [age, 65 - age];
-}
+// function calcAgeRetirement(year) {
+//   const age2 = new Date().getFullYear() - year;
+//   return [age, 65 - age];
+// }
 
-const [age2, retirement] = calcAgeRetirement(1990);
-console.log(age2, retirement);
+// const [age2, retirement] = calcAgeRetirement(1990);
+// console.log(age2, retirement);
+
+/*******************
+ * ES6 Arrays and Array Methods
+ */
+
+//  const boxes = document.querySelectorAll('.box');
+
+//  //ES5
+//  var boxesArr5 = Array.prototype.slice.call(boxes);
+
+//  boxesArr5.forEach(function(cur) {
+//    cur.style.backgroundColor = 'dodgerblue';
+//  });
+ 
+ 
+//  //ES6
+// const boxesArr6 = Array.from(boxes);
+
+// boxesArr6.forEach(cur => cur.style.backgroundColor = 'purple');
+
+// Array.from(boxes).forEach(cur => cur.style.backgroundColor = 'dodgerblue');
+
+//ES6 for of loop
+// for (const cur of boxesArr6) {
+//   if (cur.className === 'box blue') {
+//     continue;
+//   }
+//   cur.textContent = 'I changed to blue';
+// };
+
+// //ES6 Even better way
+// for (const cur of boxesArr6) {
+//   if (cur.className.includes('blue')) {
+//     continue;
+//   }
+//   cur.textContent = 'I changed to blue';
+// };
+
+// //ES6 find and findIndex
+// let ages = [16, 17, 12, 21, 11];
+
+// console.log(ages.findIndex(cur => cur >= 18));
+// console.log(ages.find(cur => cur >= 18));
+
+/*************************
+ * Spread Operator in ES6
+ */
+
+ function addFourAges(a, b, c, d) {
+   return a + b + c + d;
+ };
+
+ //ES5
+ var ages = [18, 30, 12, 21];
+
+ var sum1 = addFourAges.apply(null, ages);
+ console.log(sum1);
+
+ //ES6
+ let sum2 = addFourAges(...ages);
+ console.log(sum2);
+
+const fam1 = ['John', 'Jane', 'Mark'];
+const fam2 = ['Caleb', 'Lindsay', 'Sarah'];
+const bigFam = [...fam1, ...fam2, 'Grant', 'Lisa'];
+console.log(bigFam);
+
+
+const h = document.querySelector('h1');
+const boxes = document.querySelectorAll('.box');
+
+const all = [h, ...boxes];
+Array.from(all).forEach(cur => cur.style.color = 'purple');
