@@ -226,24 +226,94 @@
  * Rest Parameters
  */
 
- //ES5
- function isFullAge5() {
-   var argsArr = Array.prototype.slice.call(arguments);
-   argsArr.forEach(function(cur) {
-     console.log(2020 - cur >= 18);
-   });
- };
+//  //ES5
+//  function isFullAge5() {
+//    var argsArr = Array.prototype.slice.call(arguments);
+//    argsArr.forEach(function(cur) {
+//      console.log(2020 - cur >= 18);
+//    });
+//  };
 
-//  isFullAge5(1990, 2007, 1965);
+// //  isFullAge5(1990, 2007, 1965);
 
- //ES6
- function isFullAge6(limit, ...years) {
-   years.forEach(cur => console.log(2020 - cur >= limit));
- };
+//  //ES6
+//  function isFullAge6(limit, ...years) {
+//    years.forEach(cur => console.log(2020 - cur >= limit));
+//  };
 
- isFullAge6(18, 1990, 2007, 1965);
+//  isFullAge6(18, 1990, 2007, 1965);
 
- let years6 = [18, 1990, 2009, 2007, 1965, 2010, 1989];
- isFullAge6(...years6);
+//  let years6 = [1990, 2009, 2007, 1965, 2010, 1989];
+//  isFullAge6(18, ...years6);
 
-isFullAge6(16, 1990, 2015, 1989);
+// isFullAge6(16, 1990, 2015, 1989);
+
+
+/*************************
+ * Default Parameters
+ */
+
+// //ES5
+// function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
+//   lastName === undefined ? lastName = 'Smith' : lastName =lastName;
+//   nationality === undefined ? nationality = 'american' : nationality = nationality;
+  
+//   this.firstName = firstName;
+//   this.lastName = lastName;
+//   this.yearOfBirth = yearOfBirth;
+//   this.nationality = nationality;   
+//  }
+
+//  var caleb = new SmithPerson('Caleb', 1989);
+//  console.log(caleb);
+//  var jane = new SmithPerson('Jane', 1997, 'Williams', 'Spanish')
+//  console.log(jane);
+
+//  //ES6
+//  function PollardPerson(firstName, yearOfBirth, lastName = 'Pollard', nationality = 'Chillian') {
+//   this.firstName = firstName;
+//   this.lastName = lastName;
+//   this.yearOfBirth = yearOfBirth;
+//   this.nationality = nationality; 
+//  }
+
+//  let josh = new PollardPerson('Josh', 2023);
+//  console.log(josh);
+//  let captain = new PollardPerson('captain', 2025, 'Smith', 'american');
+//  console.log(captain);
+
+/***********************
+ * Maps
+ */
+
+ const question = new Map();
+ question.set('question', 'What is the official name of the lasted major JavaScript version?')
+ question.set(1, 'ES5');
+ question.set(2, 'ES6');
+ question.set(3, 'ES2015');
+ question.set(4, 'ES7');
+ question.set('correct', 3);
+ question.set(true, 'That\'s correct, congrats!! :)')
+ question.set(false, 'Wrong, you need practice');
+
+ console.log(question.get('question'));
+//  console.log(question.size);
+
+//  if (question.has(4)) {
+//    question.delete(4);
+//    console.log('question 4 is here');
+//  }
+
+//  question.clear();
+
+// question.forEach((value, key) => console.log(`This is ${key} and it's value is set to ${value}`));
+
+for (let [key, value] of question.entries()) {
+  if (typeof(key) === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+};
+
+const userAnswer = parseInt(prompt('Select the correct answer'));
+
+console.log(question.get(userAnswer === question.get('correct')));
