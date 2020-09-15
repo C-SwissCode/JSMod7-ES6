@@ -506,12 +506,12 @@ streetAvg = streetLengthsTotal / streetLengths.size;
 5. Size classification of all streets: tiny/small/normal/big/huge. If the size is unknown, the default is normal
  */
 
-let parksReport, streetsReport
+let parksReport, streetsReport;
 parksReport = '----PARKS REPORT-----';
 streetsReport = '----STREETS REPORT-----';
 
 console.log(parksReport);
-console.log(`Our 3 parks have an average age of ${avgParkAge} years`)
+console.log(`Our 3 parks have an average age of ${avgParkAge} years`);
 console.log(`${greenPark.name} has a tree density of ${greenPark.calcTreeDensity()} per square foot`);
 console.log(`${nationalPark.name} has a tree density of ${nationalPark.calcTreeDensity()} per square foot`);
 console.log(`${oakPark.name} has a tree density of ${oakPark.calcTreeDensity()} per square foot`);
