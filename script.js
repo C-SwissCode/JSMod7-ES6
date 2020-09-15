@@ -465,12 +465,6 @@ const evergreenSt = new Street('Evergreen Street', 2001, 'big', 18);
 const fourthSt = new Street('4th Street', 1989, undefined, 12);
 const sunsetBlvd = new Street('Sunset Boulevard', 1968, 'tiny', 2);
 
-const streetLengths = new Map();
-streetLengths.set(oceanAve.name, oceanAve.length);
-streetLengths.set(evergreenSt.name, evergreenSt.length);
-streetLengths.set(fourthSt.name, fourthSt.length);
-streetLengths.set(sunsetBlvd.name, sunsetBlvd.length);
-
 const streetMap = new Map();
 streetMap.set(oceanAve.name, oceanAve);
 streetMap.set(evergreenSt.name, evergreenSt);
@@ -492,8 +486,8 @@ for (const [key, value] of parkTrees) {
 let streetLengthsTotal = 0;
 let streetAvg;
 
-streetLengths.forEach(value => streetLengthsTotal += value)
-streetAvg = streetLengthsTotal / streetLengths.size;
+streetMap.forEach(value => streetLengthsTotal += value.length);
+streetAvg = streetLengthsTotal / streetMap.size;
 
 
 //Print to console
