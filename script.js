@@ -160,8 +160,8 @@
 //  boxesArr5.forEach(function(cur) {
 //    cur.style.backgroundColor = 'dodgerblue';
 //  });
- 
- 
+
+
 //  //ES6
 // const boxesArr6 = Array.from(boxes);
 
@@ -257,7 +257,7 @@
 // function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
 //   lastName === undefined ? lastName = 'Smith' : lastName =lastName;
 //   nationality === undefined ? nationality = 'american' : nationality = nationality;
-  
+
 //   this.firstName = firstName;
 //   this.lastName = lastName;
 //   this.yearOfBirth = yearOfBirth;
@@ -298,7 +298,7 @@
 
 //  console.log(question.get('question'));
 
- /*
+/*
   console.log(question.size);
 
  if (question.has(4)) {
@@ -362,7 +362,7 @@ question.forEach((value, key) => console.log(`This is ${key} and it's value is s
 //     this.yearOfBirth = yearOfBirth;
 //     this.job = job;
 //   };
-  
+
 //   calculateAge() {
 //     let age = new Date().getFullYear() - this.yearOfBirth;
 //     console.log(age);
@@ -409,3 +409,116 @@ All the report data should be printed to the console.
 HINT: Use some of the ES6 features: classes, subclasses, template strings, default parameters, maps, arrow functions, destructuring, etc.
 
 */
+
+class Town {
+  constructor(name, buildYear) {
+    this.name = name;
+    this.buildYear = buildYear;
+  };
+};
+
+class Park extends Town {
+  constructor(name, buildYear, treeTotal, sqftArea) {
+    super(name, buildYear);
+    this.treeTotal = treeTotal;
+    this.sqftArea = sqftArea;
+  }
+
+  calcAge() {
+    this.age = new Date().getFullYear() - this.buildYear;
+    return this.age;
+  };
+
+  calcTreeDensity() {
+    this.treeDensity = this.treeTotal / this.sqftArea;
+    return this.treeDensity;
+  };
+}
+
+class Street extends Town {
+  constructor(name, buildYear, size = 'normal', length) {
+    super(name, buildYear);
+    this.size = size;
+    this.length = length;
+  }
+}
+
+//Create Parks
+const greenPark = new Park('Green Park', 1975, 4500, 4000);
+const nationalPark = new Park('National Park', 1998, 750, 950);
+const oakPark = new Park('Oak Park', 2008, 300, 425);
+
+const parkTrees = new Map();
+parkTrees.set(greenPark.treeTotal, greenPark.name);
+parkTrees.set(nationalPark.treeTotal, nationalPark.name);
+parkTrees.set(oakPark.treeTotal, oakPark.name);
+
+const parkAges = new Map();
+parkAges.set('greenPark', greenPark.calcAge());
+parkAges.set('nationalPark', nationalPark.calcAge());
+parkAges.set('oakPark', oakPark.calcAge());
+
+//Create Streets
+//tiny (1-5)/small (6-10)/normal (11-15)/big (16-20)/huge (21 +)
+const oceanAve = new Street('Ocean Ave', 2003, 'small', 7);
+const evergreenSt = new Street('Evergreen Street', 2001, 'big', 18);
+const fourthSt = new Street('4th Street', 1989, undefined, 12);
+const sunsetBlvd = new Street('Sunset Boulevard', 1968, 'tiny', 2);
+
+const streetLengths = new Map();
+streetLengths.set(oceanAve.name, oceanAve.length);
+streetLengths.set(evergreenSt.name, evergreenSt.length);
+streetLengths.set(fourthSt.name, fourthSt.length);
+streetLengths.set(sunsetBlvd.name, sunsetBlvd.length);
+
+const streetMap = new Map();
+streetMap.set(oceanAve.name, oceanAve);
+streetMap.set(evergreenSt.name, evergreenSt);
+streetMap.set(fourthSt.name, fourthSt);
+streetMap.set(sunsetBlvd.name, sunsetBlvd);
+
+//Park and tree calculations
+let avgParkAge = (greenPark.age + nationalPark.age + oakPark.age) / parkAges.size;
+
+let parkKiloTrees;
+
+for (const [key, value] of parkTrees) {
+  if (key >= 1000) {
+    parkKiloTrees = value;
+  };
+};
+
+//Street Calculations
+let streetLengthsTotal = 0;
+let streetAvg;
+
+streetLengths.forEach(value => streetLengthsTotal += value)
+streetAvg = streetLengthsTotal / streetLengths.size;
+
+
+//Print to console
+
+/**
+1. Tree density of each park in the town (forumla: number of trees/park area)
+2. Average age of each town's park (forumla: sum of all ages/number of parks)
+3. The name of the park that has more than 1000 trees
+4. Total and average length of the town's streets
+5. Size classification of all streets: tiny/small/normal/big/huge. If the size is unknown, the default is normal
+ */
+
+let parksReport, streetsReport
+parksReport = '----PARKS REPORT-----';
+streetsReport = '----STREETS REPORT-----';
+
+console.log(parksReport);
+console.log(`Our 3 parks have an average age of ${avgParkAge} years`)
+console.log(`${greenPark.name} has a tree density of ${greenPark.calcTreeDensity()} per square foot`);
+console.log(`${nationalPark.name} has a tree density of ${nationalPark.calcTreeDensity()} per square foot`);
+console.log(`${oakPark.name} has a tree density of ${oakPark.calcTreeDensity()} per square foot`);
+console.log(`${parkKiloTrees} has more than 1000 trees`);
+
+console.log(streetsReport);
+console.log(`Our 4 streets have a total length of ${streetLengthsTotal} miles with an average of ${streetAvg} miles per street`);
+for (const [key, value] of streetMap) {
+  console.log(`${key}, built in ${value.buildYear}, is a ${value.size} street.`);
+};
