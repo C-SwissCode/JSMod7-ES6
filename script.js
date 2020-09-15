@@ -286,34 +286,102 @@
  * Maps
  */
 
- const question = new Map();
- question.set('question', 'What is the official name of the lasted major JavaScript version?')
- question.set(1, 'ES5');
- question.set(2, 'ES6');
- question.set(3, 'ES2015');
- question.set(4, 'ES7');
- question.set('correct', 3);
- question.set(true, 'That\'s correct, congrats!! :)')
- question.set(false, 'Wrong, you need practice');
+//  const question = new Map();
+//  question.set('question', 'What is the official name of the lasted major JavaScript version?')
+//  question.set(1, 'ES5');
+//  question.set(2, 'ES6');
+//  question.set(3, 'ES2015');
+//  question.set(4, 'ES7');
+//  question.set('correct', 3);
+//  question.set(true, 'That\'s correct, congrats!! :)')
+//  question.set(false, 'Wrong, you need practice');
 
- console.log(question.get('question'));
-//  console.log(question.size);
+//  console.log(question.get('question'));
 
-//  if (question.has(4)) {
-//    question.delete(4);
-//    console.log('question 4 is here');
-//  }
+ /*
+  console.log(question.size);
 
-//  question.clear();
+ if (question.has(4)) {
+   question.delete(4);
+   console.log('question 4 is here');
+ }
 
-// question.forEach((value, key) => console.log(`This is ${key} and it's value is set to ${value}`));
+ question.clear();
 
-for (let [key, value] of question.entries()) {
-  if (typeof(key) === 'number') {
-    console.log(`Answer ${key}: ${value}`);
-  }
+question.forEach((value, key) => console.log(`This is ${key} and it's value is set to ${value}`));
+*/
+
+// for (let [key, value] of question.entries()) {
+//   if (typeof(key) === 'number') {
+//     console.log(`Answer ${key}: ${value}`);
+//   }
+// };
+
+// const userAnswer = parseInt(prompt('Select the correct answer'));
+
+// console.log(question.get(userAnswer === question.get('correct')));
+
+/*********************
+ * Classes ES5 vs ES6
+ */
+
+ //ES5
+ var Person5 = function (name, yearOfBirth, job) {
+   this.name = name;
+   this.yearOfBirth = yearOfBirth;
+   this.job = job;   
+ };
+
+ Person5.prototype.calculateAge = function() {
+  var age = new Date().getFullYear() - this.yearOfBirth;
+  console.log(age);
 };
 
-const userAnswer = parseInt(prompt('Select the correct answer'));
+var Athlete5 = function (name, yearOfBirth, job, olympicGames, medals) {
+  Person5.call(this, name, yearOfBirth, job);
+  this.olympicGames = olympicGames;
+  this.medals = medals;
+};
 
-console.log(question.get(userAnswer === question.get('correct')));
+Athlete5.prototype = Object.create(Person5.prototype);
+
+Athlete5.prototype.wonMedal = function() {
+  this.medals++;
+  console.log(this.medals);
+}
+
+var johnAthelete5 = new Athlete5('John', 1989, 'swimmer', 3, 10);
+
+johnAthelete5.calculateAge();
+johnAthelete5.wonMedal();
+
+//ES6
+class Person6 {
+  constructor(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+  };
+  
+  calculateAge() {
+    let age = new Date().getFullYear() - this.yearOfBirth;
+    console.log(age);
+  };
+};
+
+class Athelete6 extends Person6 {
+  constructor(name, yearOfBirth, job, olympicGames, medals) {
+    super (name, yearOfBirth, job);
+    this.olympicGames = olympicGames;
+    this.medals = medals;
+  };
+  wonMedal() {
+    this.medals++;
+    console.log(this.medals);
+  };
+};
+
+const johnAthelete6 = new Athelete6('Jonn', 1989, 'swimmer', 3, 10);
+
+johnAthelete6.calculateAge();
+johnAthelete6.wonMedal();
