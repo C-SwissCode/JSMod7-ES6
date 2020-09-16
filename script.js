@@ -500,19 +500,26 @@ streetAvg = streetLengthsTotal / streetMap.size;
 5. Size classification of all streets: tiny/small/normal/big/huge. If the size is unknown, the default is normal
  */
 
-let parksReport, streetsReport;
-parksReport = '----PARKS REPORT-----';
-streetsReport = '----STREETS REPORT-----';
+function parksReport() {
+  const parksReport = '----PARKS REPORT-----';
 
-console.log(parksReport);
-console.log(`Our 3 parks have an average age of ${avgParkAge} years`);
-console.log(`${greenPark.name} has a tree density of ${greenPark.calcTreeDensity()} per square foot`);
-console.log(`${nationalPark.name} has a tree density of ${nationalPark.calcTreeDensity()} per square foot`);
-console.log(`${oakPark.name} has a tree density of ${oakPark.calcTreeDensity()} per square foot`);
-console.log(`${parkKiloTrees} has more than 1000 trees`);
-
-console.log(streetsReport);
-console.log(`Our 4 streets have a total length of ${streetLengthsTotal} miles with an average of ${streetAvg} miles per street`);
-for (const [key, value] of streetMap) {
-  console.log(`${key}, built in ${value.buildYear}, is a ${value.size} street.`);
+  console.log(parksReport);
+  console.log(`Our 3 parks have an average age of ${avgParkAge} years`);
+  console.log(`${greenPark.name} has a tree density of ${greenPark.calcTreeDensity()} per square foot`);
+  console.log(`${nationalPark.name} has a tree density of ${nationalPark.calcTreeDensity()} per square foot`);
+  console.log(`${oakPark.name} has a tree density of ${oakPark.calcTreeDensity()} per square foot`);
+  console.log(`${parkKiloTrees} has more than 1000 trees`);
 };
+
+function streetsReport() {
+  const streetsReport = '----STREETS REPORT-----';
+
+  console.log(streetsReport);
+  console.log(`Our 4 streets have a total length of ${streetLengthsTotal} miles with an average of ${streetAvg} miles per street`);
+  for (const [key, value] of streetMap) {
+    console.log(`${key}, built in ${value.buildYear}, is a ${value.size} street.`);
+  };
+};
+
+parksReport();
+streetsReport();
